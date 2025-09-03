@@ -31,7 +31,7 @@ function Header({ onMenuClick, className, isSidebarOpen }: HeaderProps) {
           .filter(id => sensors.some(s => s.id === id))
         setSelectedSensors(ids.length ? ids : sensors.map(s => s.id))
       } else {
-        setSelectedSensors(sensors.map(s => s.id))
+        setSelectedSensors([sensors[0].id])
       }
     }
   }, [loading, sensors, location.search])
