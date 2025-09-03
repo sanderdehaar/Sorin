@@ -20,6 +20,7 @@ interface DropdownProps {
   type?: 'default' | 'date'
   value?: Date | null
   onDateChange?: (date: Date | null) => void
+  visibleMonth?: Date
 }
 
 export function Dropdown({
@@ -37,7 +38,8 @@ export function Dropdown({
   setOpen,
   type = 'default',
   value,
-  onDateChange
+  onDateChange,
+  visibleMonth,
 }: DropdownProps) {
   const [internalSelected, setInternalSelected] = useState<string[]>([])
 
@@ -110,6 +112,7 @@ export function Dropdown({
               onChange={onDateChange}
               maxDate={new Date()}
               minDate={new Date(new Date().setDate(new Date().getDate() - 6))}
+              openToDate={visibleMonth || value || new Date()} // <-- ensure calendar opens on selected date
             />
           ) : (
             <ul>
