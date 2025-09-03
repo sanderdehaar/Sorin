@@ -179,22 +179,6 @@ const Dashboard: React.FC = () => {
                   open={openDropdown === 'time'}
                   setOpen={(val) => setOpenDropdown(val ? 'time' : null)}
                 />
-                <Dropdown
-                  options={sensors.map(s => s.id)}
-                  selected={selectedSensorIds}
-                  onSelect={(values) => {
-                    if (values.length) {
-                      localStorage.setItem('selectedSensors', JSON.stringify(values))
-                      window.history.replaceState(null, '', `?sensor=${values.join(',')}`)
-                    }
-                  }}
-                  label="Sensor"
-                  multiSelect={false}
-                  singleSelect
-                  localStorageKey="selectedSensors"
-                  open={openDropdown === 'sensor'}
-                  setOpen={(val) => setOpenDropdown(val ? 'sensor' : null)}
-                />
               </div>
             </div>
             <LineChart labels={chartLabels} datasets={chartDatasets} />
