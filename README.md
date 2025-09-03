@@ -1,6 +1,6 @@
 # Sorin
 
-An AI-powered sensor data platform for farmers, built with **React**, **TypeScript**, and **Vite**.  
+A sensor data platform for farmers, built with **React**, **TypeScript**, and **Vite**.  
 Sorin helps farmers monitor their fields with live sensor data, interactive charts, and smart insights.
 
 ---
