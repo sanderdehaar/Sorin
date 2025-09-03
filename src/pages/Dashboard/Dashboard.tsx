@@ -18,7 +18,7 @@ const colorPalette = [
   '#AB47BC','#26C6DA','#FF7043','#8D6E63'
 ]
 
-const DEFAULT_PREVIEW_DATE = new Date(2025, 9, 1) // October 1, 2025
+const DEFAULT_PREVIEW_DATE = new Date(2025, 7, 1)
 
 const Dashboard: React.FC = () => {
   const [searchParams] = useSearchParams()
@@ -68,24 +68,33 @@ const Dashboard: React.FC = () => {
     }
   }
 
-  // --- Chart Dataset Effect ---
   useEffect(() => {
     if (!selectedSensorIds.length || !selectedMeasurements.length || !measurements.length) return
 
     const type = selectedMeasurements[0].split(' ')[0].toLowerCase()
     const hoursToShow = timeRange === '12h' ? 12 : 24
+    
+    const endTime = new Date(selectedDate)
+    endTime.setHours(24, 0, 0, 0)
+    
+    const startTime = new Date(endTime)
+    startTime.setHours(endTime.getHours() - hoursToShow, 0, 0, 0)
 
-    const startTime = new Date(selectedDate)
-    startTime.setHours(0, 0, 0, 0)
-
+    const labels: string[] = []
     const timePoints: Date[] = []
+    
     for (let i = 0; i < hoursToShow; i++) {
       const d = new Date(startTime)
       d.setHours(startTime.getHours() + i)
       timePoints.push(d)
     }
 
-    const labels = timePoints.map(d => d.getHours().toString().padStart(2, '0') + ':00')
+    timePoints.forEach((d) => {
+      const hours = d.getHours()
+      const displayHour = hours === 24 ? '24' : hours.toString().padStart(2, '0')
+      labels.push(`${displayHour}:00`)
+    })
+
     setChartLabels(labels)
 
     const datasets: LineChartDataset[] = selectedSensorIds.map((sensorId, idx) => {
@@ -93,17 +102,23 @@ const Dashboard: React.FC = () => {
         .filter(m => m.sensor_id === sensorId && m.type.toLowerCase().includes(type))
         .map(m => ({ ...m, measured_at: new Date(m.measured_at) }))
 
-      const dataPoints = timePoints.map(tp => {
-        const nextHour = new Date(tp)
-        nextHour.setHours(tp.getHours() + 1)
+      const dataPoints = timePoints.map((timePoint) => {
+        const hourStart = new Date(timePoint)
+        hourStart.setMinutes(0, 0, 0)
+        const hourEnd = new Date(hourStart)
+        hourEnd.setHours(hourEnd.getHours() + 1)
 
-        const found = sensorMeasurements.find(m => m.measured_at >= tp && m.measured_at < nextHour)
+        const found = sensorMeasurements.find(m => {
+          const measuredTime = new Date(m.measured_at)
+          return measuredTime >= hourStart && measuredTime < hourEnd
+        })
         return found ? found.value : null
       })
 
       const sensorName = sensors.find(s => s.id === sensorId)?.id
-      const label = sensorName ? `SENSOR-${sensorName.slice(0,5).toUpperCase()}` : `Sensor ${idx+1}`
-      return { label, data: dataPoints, borderColor: colorPalette[idx % colorPalette.length] }
+      const formattedLabel = sensorName ? `SENSOR-${sensorName.slice(0,5).toUpperCase()}` : `Sensor ${idx+1}`
+
+      return { label: formattedLabel, data: dataPoints, borderColor: colorPalette[idx % colorPalette.length] }
     })
 
     setChartDatasets(datasets)
@@ -127,8 +142,6 @@ const Dashboard: React.FC = () => {
                     label="Date"
                     open={openDropdown === 'date'}
                     setOpen={(val) => setOpenDropdown(val ? 'date' : null)}
-                    // FORCE calendar to display month of selectedDate
-                    visibleMonth={selectedDate} 
                   />
                 </div>
                 <Dropdown
