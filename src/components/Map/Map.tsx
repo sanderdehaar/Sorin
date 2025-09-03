@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import maplibregl, { Marker, Popup } from 'maplibre-gl'
 import 'maplibre-gl/dist/maplibre-gl.css'
-import './map.css'
+import './Map.css'
 
 export interface Sensor {
   id: string
