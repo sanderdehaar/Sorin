@@ -18,7 +18,7 @@ const colorPalette = [
   '#AB47BC','#26C6DA','#FF7043','#8D6E63'
 ]
 
-const DEFAULT_PREVIEW_DATE = new Date(2025, 9, 1);
+const DEFAULT_PREVIEW_DATE = new Date(2025, 9, 1)
 
 const Dashboard: React.FC = () => {
   const [searchParams] = useSearchParams()
@@ -69,7 +69,7 @@ const Dashboard: React.FC = () => {
   }
 
   useEffect(() => {
-    if (!selectedSensorIds.length || !selectedMeasurements.length) return
+    if (!selectedSensorIds.length || !selectedMeasurements.length || !measurements.length) return
 
     const type = selectedMeasurements[0].split(' ')[0].toLowerCase()
     const hoursToShow = timeRange === '12h' ? 12 : 24
@@ -107,12 +107,6 @@ const Dashboard: React.FC = () => {
         hourStart.setMinutes(0, 0, 0)
         const hourEnd = new Date(hourStart)
         hourEnd.setHours(hourEnd.getHours() + 1)
-
-        const measurementTime = new Date(timePoint)
-        if (measurementTime.getHours() === 24) {
-          measurementTime.setDate(measurementTime.getDate() + 1)
-          measurementTime.setHours(0, 0, 0, 0)
-        }
 
         const found = sensorMeasurements.find(m => {
           const measuredTime = new Date(m.measured_at)
