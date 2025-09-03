@@ -18,7 +18,7 @@ const colorPalette = [
   '#AB47BC','#26C6DA','#FF7043','#8D6E63'
 ]
 
-const DEFAULT_PREVIEW_DATE = new Date(2025, 7, 1)
+const DEFAULT_PREVIEW_DATE = new Date(2025, 8, 1)
 
 const Dashboard: React.FC = () => {
   const [searchParams] = useSearchParams()
@@ -52,7 +52,10 @@ const Dashboard: React.FC = () => {
     if (!sensors.length) return []
     const sensorParam = searchParams.get('sensor') || ''
     const ids = sensorParam.split(',').filter(Boolean)
-    return ids.length ? ids : sensors.map(s => s.id)
+
+    if (ids.length) return ids
+
+    return sensors.length ? [sensors[0].id] : []
   }, [searchParams, sensors])
 
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
@@ -63,7 +66,7 @@ const Dashboard: React.FC = () => {
 
   const handleTimeChange = (values: string[]) => { 
     if(values.length){ 
-      setTimeRange(values[0] as '12h'|'24h'); 
+      setTimeRange(values[0] as '12h'|'24h') 
       localStorage.setItem('selectedTimeRange', JSON.stringify(values[0])) 
     }
   }
