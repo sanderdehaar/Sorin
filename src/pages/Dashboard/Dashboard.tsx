@@ -14,8 +14,8 @@ import './Dashboard.css'
 const measurementOptions = ['Humidity (%)', 'Temperature (°C)', 'Pressure (pH)']
 const timeOptions = ['12h', '24h']
 const colorPalette = [
-  '#66BB6A','#EF5350','#42A5F5','#FFCA28',
-  '#AB47BC','#26C6DA','#FF7043','#8D6E63'
+  '#66BB6A', '#EF5350', '#42A5F5', '#FFCA28',
+  '#AB47BC', '#26C6DA', '#FF7043', '#8D6E63'
 ]
 
 const DEFAULT_PREVIEW_DATE = new Date(2025, 8, 1)
@@ -50,24 +50,34 @@ const Dashboard: React.FC = () => {
 
   const selectedSensorIds = useMemo(() => {
     if (!sensors.length) return []
-    const sensorParam = searchParams.get('sensor') || ''
-    const ids = sensorParam.split(',').filter(Boolean)
 
-    if (ids.length) return ids
+    const sensorParam = searchParams.get('sensor') || ''
+    const idsFromUrl = sensorParam.split(',').filter(Boolean)
+    if (idsFromUrl.length) return idsFromUrl
+
+    const stored = localStorage.getItem('selectedSensors')
+    if (stored) {
+      try {
+        const parsed = JSON.parse(stored)
+        if (Array.isArray(parsed) && parsed.length) {
+          return parsed.filter(id => sensors.some(s => s.id === id))
+        }
+      } catch {}
+    }
 
     return sensors.length ? [sensors[0].id] : []
   }, [searchParams, sensors])
 
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
 
-  const handleMeasurementChange = (values: string[]) => { 
-    if(values.length) setSelectedMeasurements(values) 
+  const handleMeasurementChange = (values: string[]) => {
+    if (values.length) setSelectedMeasurements(values)
   }
 
-  const handleTimeChange = (values: string[]) => { 
-    if(values.length){ 
-      setTimeRange(values[0] as '12h'|'24h') 
-      localStorage.setItem('selectedTimeRange', JSON.stringify(values[0])) 
+  const handleTimeChange = (values: string[]) => {
+    if (values.length) {
+      setTimeRange(values[0] as '12h' | '24h')
+      localStorage.setItem('selectedTimeRange', JSON.stringify(values[0]))
     }
   }
 
@@ -76,16 +86,16 @@ const Dashboard: React.FC = () => {
 
     const type = selectedMeasurements[0].split(' ')[0].toLowerCase()
     const hoursToShow = timeRange === '12h' ? 12 : 24
-    
+
     const endTime = new Date(selectedDate)
     endTime.setHours(24, 0, 0, 0)
-    
+
     const startTime = new Date(endTime)
     startTime.setHours(endTime.getHours() - hoursToShow, 0, 0, 0)
 
     const labels: string[] = []
     const timePoints: Date[] = []
-    
+
     for (let i = 0; i < hoursToShow; i++) {
       const d = new Date(startTime)
       d.setHours(startTime.getHours() + i)
@@ -119,7 +129,7 @@ const Dashboard: React.FC = () => {
       })
 
       const sensorName = sensors.find(s => s.id === sensorId)?.id
-      const formattedLabel = sensorName ? `SENSOR-${sensorName.slice(0,5).toUpperCase()}` : `Sensor ${idx+1}`
+      const formattedLabel = sensorName ? `SENSOR-${sensorName.slice(0, 5).toUpperCase()}` : `Sensor ${idx + 1}`
 
       return { label: formattedLabel, data: dataPoints, borderColor: colorPalette[idx % colorPalette.length] }
     })
@@ -127,7 +137,7 @@ const Dashboard: React.FC = () => {
     setChartDatasets(datasets)
   }, [measurements, selectedSensorIds, selectedMeasurements, sensors, selectedDate, timeRange])
 
-  if(error) return <div>Error: {error}</div>
+  if (error) return <div>Error: {error}</div>
 
   return (
     <div className="dashboard">
@@ -141,7 +151,7 @@ const Dashboard: React.FC = () => {
                   <Dropdown
                     type="date"
                     value={selectedDate}
-                    onDateChange={(date) => { if(date) setSelectedDate(date) }}
+                    onDateChange={(date) => { if (date) setSelectedDate(date) }}
                     label="Date"
                     open={openDropdown === 'date'}
                     setOpen={(val) => setOpenDropdown(val ? 'date' : null)}
@@ -155,8 +165,8 @@ const Dashboard: React.FC = () => {
                   multiSelect={false}
                   singleSelect
                   localStorageKey="selectedMeasurements"
-                  open={openDropdown==='type'}
-                  setOpen={(val)=>setOpenDropdown(val?'type':null)}
+                  open={openDropdown === 'type'}
+                  setOpen={(val) => setOpenDropdown(val ? 'type' : null)}
                 />
                 <Dropdown
                   options={timeOptions}
@@ -166,8 +176,24 @@ const Dashboard: React.FC = () => {
                   multiSelect={false}
                   singleSelect
                   localStorageKey="selectedTimeRange"
-                  open={openDropdown==='time'}
-                  setOpen={(val)=>setOpenDropdown(val?'time':null)}
+                  open={openDropdown === 'time'}
+                  setOpen={(val) => setOpenDropdown(val ? 'time' : null)}
+                />
+                <Dropdown
+                  options={sensors.map(s => s.id)}
+                  selected={selectedSensorIds}
+                  onSelect={(values) => {
+                    if (values.length) {
+                      localStorage.setItem('selectedSensors', JSON.stringify(values))
+                      window.history.replaceState(null, '', `?sensor=${values.join(',')}`)
+                    }
+                  }}
+                  label="Sensor"
+                  multiSelect={false}
+                  singleSelect
+                  localStorageKey="selectedSensors"
+                  open={openDropdown === 'sensor'}
+                  setOpen={(val) => setOpenDropdown(val ? 'sensor' : null)}
                 />
               </div>
             </div>
@@ -190,9 +216,9 @@ const Dashboard: React.FC = () => {
               </div>
             </div>
 
-            <DashboardMap 
-              sensors={sensors} 
-              onHoverSensor={setHoveredSensor} 
+            <DashboardMap
+              sensors={sensors}
+              onHoverSensor={setHoveredSensor}
             />
 
             {/* {hoveredSensor && (
