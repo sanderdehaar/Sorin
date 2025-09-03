@@ -18,7 +18,7 @@ const colorPalette = [
   '#AB47BC','#26C6DA','#FF7043','#8D6E63'
 ]
 
-const DEFAULT_PREVIEW_DATE = new Date(2025, 9, 31);
+const DEFAULT_PREVIEW_DATE = new Date(2025, 9, 1);
 
 const Dashboard: React.FC = () => {
   const [searchParams] = useSearchParams()
