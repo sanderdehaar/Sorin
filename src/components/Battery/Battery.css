@@ -1,0 +1,34 @@
+.battery-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-md);
+    width: 100%;
+    height: max-content;
+}
+
+.battery-container span {
+    text-align: start;
+    font-family: var(--font-secondary);
+    color: var(--color-white);
+    font-size: var(--font-md);
+    font-weight: 400;
+}
+
+.battery {
+  display: flex;
+  gap: 6px;
+  width: 100%;
+  height: 60px;
+  position: relative;
+}
+
+.battery-bar {
+  flex: 1;
+  background-color: var(--color-dark);
+  border-radius: 2px;
+  transition: background-color 0.3s ease;
+}
+
+.battery-bar.filled {
+  background-color: var(--color-green);
+}

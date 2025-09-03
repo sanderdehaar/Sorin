@@ -1,0 +1,7 @@
+/* Line chart component */
+.chart-container {
+    width: calc(100% + 60px);
+    height: 100%;
+    margin-left: 40px;
+    position: relative;
+}

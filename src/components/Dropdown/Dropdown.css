@@ -1,0 +1,99 @@
+/* Dropdown component */
+.dropdown-container {
+    position: relative;
+    display: inline-block;
+    height: max-content;
+}
+
+.dropdown-container .dropdown-selected {
+    position: relative;
+    top: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    margin: var(--gap-sm);
+    background: transparent;
+    color: var(--color-gray-light);
+    font-size: var(--font-md);
+}
+
+.dropdown-container .dropdown-selected .dropdown-chevron {
+    transition: transform 0.3s ease;
+    margin-left: var(--gap-xs);
+    margin-top: 6px;
+}
+
+.dropdown-container .dropdown-chevron.open {
+    transform: rotate(180deg);
+}
+
+.dropdown-container .dropdown-options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: var(--color-dark-gray2);
+    list-style: none;
+    padding: 0;
+    width: 100%;
+    z-index: 10;
+    border-radius: var(--border-radius);
+    border: 1px solid rgba(142, 142, 142, 0.14);
+}
+
+.dropdown-container .dropdown-options li {
+    padding: var(--gap-sm);
+    cursor: pointer;
+    transition: background-color 0.2s;
+    color: var(--color-gray-light);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.dropdown-container .dropdown-options li:first-child {
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+}
+
+.dropdown-container .dropdown-options li:last-child {
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
+}
+
+.dropdown-container .dropdown-options li:hover {
+    background-color: var(--color-dark-gray-hover);
+}
+
+.dropdown-container .dropdown-options .dot {
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--color-gray-light);
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    transition: border-color 0.2s;
+    background-color: transparent;
+}
+
+.dropdown-container .dropdown-options .dot.active {
+    border: 1px solid var(--color-green);
+}
+
+.dropdown-container .dropdown-options .dot.active + .sensor-label {
+    color: var(--color-white);
+}
+
+.dropdown-container .dropdown-options .dot.active::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--color-accent, var(--color-green));
+}
+
+.dropdown-container .dropdown-options .sensor-label {
+    font-size: var(--font-md);
+}

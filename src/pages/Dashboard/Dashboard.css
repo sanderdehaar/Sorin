@@ -1,0 +1,88 @@
+.dashboard {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 0fr 2fr 1fr;
+  padding: var(--gap-md);
+  gap: var(--gap-md);
+  height: calc(100vh - 120px);
+  min-height: 700px;
+  width: 100%;
+  margin-top: 120px;
+}
+
+.datepicker .dropdown-options {
+  background-color: transparent;
+  border: none;
+}
+
+@media (max-width: 1200px) {
+  .dashboard {
+    display: flex;
+    flex-direction: column;
+    padding: var(--gap-sm);
+  }
+  .card1,
+  .card2,
+  .card3 {
+    width: 100%;
+    min-height: 500px;
+    max-width: 100%;
+  }
+  .card .top {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+  }
+  .dashboard {
+    height: max-content;
+  }
+  .chart-container canvas {
+    height: 500px !important;
+    position: inherit !important;
+  }
+  .maplibregl-map {
+    height: 500px;
+  }
+  .dashboard .card:last-child .top {
+    flex-direction: row;
+    align-items: center;
+  }
+  .card .top .dropdown-container {
+    margin-top: var(--gap-sm);
+  }
+}
+
+@media (max-width: 750px) {
+  .card .top h2{
+    font-size: var(--font-xl);
+  }
+  .card .top .sensor-last-seen {
+    display: none;
+  }
+  .card .top .dropdown-container .dropdown-selected {
+      top: 0px;
+      font-size: var(--font-md);
+      color: var(--color-white);
+      margin: 0;
+      padding: 8px 22px;
+      background-color: var(--color-dark-gray2);
+      border-radius: var(--border-radius);
+  }
+  .card2 {
+    gap: var(--gap-md);
+  }
+  .card3 {
+    display: flex;
+    min-height: 360px;
+  }
+  .chart-container canvas {
+    height: 360px !important;
+  }
+  .maplibregl-map {
+    height: 360px;
+  }
+  .dashboard {
+    margin-top: 80px;
+  }
+}

@@ -1,0 +1,138 @@
+/* Header component */
+header {
+    position: fixed;
+    height: 120px;
+    width: calc(100% - 120px);
+    background-color: var(--color-dark);
+    border-bottom: 1px solid rgba(142, 142, 142, 0.14);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--gap-md);
+    z-index: 1002;
+}
+
+header .header-left {
+    display: flex;
+    height: 60px;
+    align-items: center;
+    gap: var(--gap-sm);
+}
+
+header .header-left .logo-box {
+    width: 50px;
+    height: 50px;
+    border-radius: var(--border-radius);
+    background-color: var(--color-green);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+
+header .header-left .logo-box .logo {
+    width: 60%;
+    height: 60%;
+}
+
+header .header-left h1 {
+    font-family: var(--font-primary);
+    color: var(--color-white);
+    font-size: var(--font-3xl);
+}
+
+header .header-right {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-md);
+}
+
+.header-right .icon-btn,
+.header-right .alert {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+}
+
+.header-right .icon {
+    width: var(--icon-xl);
+    height: var(--icon-xl);
+    color: var(--color-white);
+    display: block;
+}
+
+.header-right .alert .notification {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    transform: translate(50%, -50%);
+    width: 12px;
+    height: 12px;
+    background-color: var(--color-red);
+    border-radius: 50%;
+    border: 1px solid var(--color-dark-gray);
+}
+
+header .header-right img {
+    width: 56px;
+    height: 56px;
+    object-fit: cover;
+    border-radius: 50px;
+}
+
+header .header-right img:hover {
+    cursor: pointer;
+}
+
+.menu-icon {
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.menu-icon:hover {
+    cursor: pointer;
+}
+
+
+.menu-icon > span {
+    width: 52px;
+    height: 3px;
+    background-color: var(--color-white);
+}
+
+.mobile-header {
+    display: none;
+}
+
+@media (max-width: 750px) {
+    header {
+        width: 100%;
+        margin-left: 0px;
+    }
+    header .menu-icon {
+        display: flex;
+    }
+    header .header-left .dropdown-container,
+    header .header-right {
+        display: none;
+    }
+    .header {
+        display: none;
+    }
+    .mobile-header {
+        display: flex;
+    }
+    header .header-left h1 {
+        display: none;
+    }
+    header .header-left .logo-box {
+        display: flex;
+    }
+    header {
+        height: 80px;
+    }
+}
