@@ -20,7 +20,6 @@
   .dashboard {
     display: flex;
     flex-direction: column;
-    padding: var(--gap-sm);
   }
   .card1,
   .card2,
@@ -54,6 +53,10 @@
 }
 
 @media (max-width: 750px) {
+  .dashboard {
+    padding: var(--gap-sm);
+    gap: var(--gap-sm);
+  }
   .card .top h2{
     font-size: var(--font-xl);
   }
@@ -74,15 +77,20 @@
   }
   .card3 {
     display: flex;
-    min-height: 360px;
+  }
+  .card{
+    min-height: 340px;
   }
   .chart-container canvas {
-    height: 360px !important;
+    height: 300px !important;
   }
   .maplibregl-map {
-    height: 360px;
+    height: 450px;
   }
   .dashboard {
     margin-top: 80px;
+  }
+  .alerts-table {
+    margin-bottom: -12px;
   }
 }
