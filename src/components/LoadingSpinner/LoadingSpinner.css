@@ -27,6 +27,6 @@
 
 @media (max-width: 1200px) { 
     .spinner-container { 
-        margin-top: 50%;
+        margin-top: calc(50% - 40px + 1.5rem);
     } 
 }
