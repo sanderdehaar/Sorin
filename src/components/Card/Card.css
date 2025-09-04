@@ -54,7 +54,7 @@
     font-size: var(--font-md);
     color: var(--color-white);
     margin: 0;
-    padding: 10px 30px;
+    padding: 12px 30px;
     background-color: var(--color-dark-gray2);
     border-radius: var(--border-radius);
 }
@@ -97,7 +97,16 @@
     grid-row: 3 / 6;
 }
 
-/* Date picker */
+.card .top button {
+    font-family: var(--font-secondary);
+    color: var(--color-white);
+    font-size: var(--font-md);
+    font-weight: 400;
+    padding: 12px 22px;
+    background-color: var(--color-dark-gray2);
+    border-radius: var(--border-radius);
+}
+
 .react-datepicker {
     right: 40px;
     background-color: var(--color-dark-gray2);
@@ -139,7 +148,6 @@
     color: var(--color-gray-light);
 }
 
-/* Disabled dates */
 .react-datepicker__day--disabled,
 .react-datepicker__month-text--disabled,
 .react-datepicker__quarter-text--disabled,
@@ -148,14 +156,12 @@
   color: var(--color-white);
 }
 
-/* Default date styles */
 .react-datepicker__day-name,
 .react-datepicker__day,
 .react-datepicker__time-name {
   color: var(--color-gray-light);
 }
 
-/* Enabled dates - red background */
 .react-datepicker__day:not(.react-datepicker__day--disabled),
 .react-datepicker__month-text:not(.react-datepicker__month-text--disabled),
 .react-datepicker__quarter-text:not(.react-datepicker__quarter-text--disabled),
@@ -178,4 +184,10 @@
 .react-datepicker__day--selected, .react-datepicker__day--in-selecting-range, .react-datepicker__day--in-range, .react-datepicker__month-text--selected, .react-datepicker__month-text--in-selecting-range, .react-datepicker__month-text--in-range, .react-datepicker__quarter-text--selected, .react-datepicker__quarter-text--in-selecting-range, .react-datepicker__quarter-text--in-range, .react-datepicker__year-text--selected, .react-datepicker__year-text--in-selecting-range, .react-datepicker__year-text--in-range {
     background-color: var(--color-green) !important;
     color: var(--color-dark-gray) !important;
+}
+
+@media (max-width: 750px) {
+    .card .top button {
+        padding: 8px 22px;
+    }
 }
