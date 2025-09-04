@@ -53,7 +53,7 @@ Open [http://localhost:5173](http://localhost:5173) in your browser.
 
 ## 🗺️ How It Works
 
-- Fake data is retrieved from the Sorin Supabase.
+- Dummy data is retrieved from the Sorin Supabase.
 - The dashboard fetches the data and displays it in line charts, cards, and maps.
 - Users can select specific sensors and time ranges to analyze trends.
 - Alerts and notifications highlight abnormal readings or critical values.
