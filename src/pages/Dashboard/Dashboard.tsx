@@ -192,22 +192,14 @@ const Dashboard: React.FC = () => {
             <div className="top">
               <div className="text">
                 <h2>Sensors</h2>
-                {hoveredSensor?.last_seen && (
-                  <span className="sensor-last-seen">
-                    Last activity recorded at: {new Date(hoveredSensor.last_seen).toLocaleString()}
-                  </span>
-                )}
+                <span className="sensor-last-seen">
+                  Last activity recorded at: {new Date(hoveredSensor.last_seen).toLocaleString()}
+                </span>
               </div>
             </div>
-
             <DashboardMap
               sensors={sensors}
-              onHoverSensor={setHoveredSensor}
             />
-
-            {/* {hoveredSensor && (
-              <Battery percentage={hoveredSensor.battery ?? 0} bars={20} />
-            )} */}
           </>
         )}
       </Card>
