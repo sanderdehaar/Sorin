@@ -20,15 +20,15 @@ Sorin helps farmers monitor their fields with live sensor data, interactive char
 
 ```
 src/
-  assets/ # Images, icons, and styling assets used in the dashboard
-  components/ # Reusable React components (Charts, Cards, Dropdowns, Map, Alerts, etc.)
-  data/ # Static or mock data for sensors, overlays, and test data
-  hooks/ # Custom React hooks (e.g., useSensors, useMap)
-  pages/ # Main pages and views (Dashboard, Analytics, Map & Alerts)
-  utils/ # Helper functions for data formatting, API calls, and chart calculations
-  index.css # Global styles and theming
-  App.tsx # Main App component wrapping the pages and layout
-  main.tsx # Entry point initializing the app
+  assets/         # Images, icons, and styling assets used in the dashboard
+  components/     # Reusable React components (Charts, Cards, Dropdowns, Map, Alerts, etc.)
+  data/           # Static or mock data for sensors, overlays, and test data
+  hooks/          # Custom React hooks (e.g., useSensors, useMap)
+  pages/          # Main pages and views (Dashboard, Analytics, Map & Alerts)
+  utils/          # Helper functions for data formatting, API calls, and chart calculations
+  index.css       # Global styles and theming
+  App.tsx         # Main App component wrapping the pages and layout
+  main.tsx        # Entry point initializing the app
 ```
 
 ---
