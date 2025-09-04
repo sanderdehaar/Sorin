@@ -34,7 +34,6 @@ const Sidebar: React.FC<SidebarProps> = ({ className, extraItems, onMenuClick })
     setActive(id)
     navigate(`/${id}${location.search}`, { replace: false })
 
-    // close sidebar on mobile if callback exists
     if (onMenuClick) onMenuClick()
   }
 
