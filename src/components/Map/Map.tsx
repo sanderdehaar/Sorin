@@ -1,6 +1,7 @@
-import React, { useEffect, useRef } from 'react'
-import maplibregl, { Marker, Popup } from 'maplibre-gl'
+import React, { useEffect, useRef, useState } from 'react'
+import maplibregl, { Marker } from 'maplibre-gl'
 import 'maplibre-gl/dist/maplibre-gl.css'
+import { MapPin } from 'lucide-react'
 import './Map.css'
 
 export interface Sensor {
@@ -15,18 +16,29 @@ interface DashboardMapProps {
   onHoverSensor?: (sensor: Sensor | null) => void
 }
 
-const DashboardMap: React.FC<DashboardMapProps> = ({ sensors, onHoverSensor }) => {
+const DashboardMap: React.FC<DashboardMapProps> = ({ sensors }) => {
   const mapContainer = useRef<HTMLDivElement>(null)
   const mapRef = useRef<maplibregl.Map | null>(null)
   const markersRef = useRef<Marker[]>([])
-  const hoverPopupRef = useRef<Popup | null>(null)
+  const [activeSensor, setActiveSensor] = useState<Sensor | null>(null)
 
   const MAPTILER_KEY = import.meta.env.VITE_MAPTILER_KEY
+
+  const handleSensorClick = (sensor: Sensor) => {
+    setActiveSensor(sensor)
+  }
+
+  const generateGoogleMapsLink = (lat: number, lng: number) => {
+    return `https://www.google.com/maps?q=${lat},${lng}`
+  }
 
   useEffect(() => {
     if (!MAPTILER_KEY) return
 
-    // init map
+    if (sensors.length > 0 && !activeSensor) {
+      setActiveSensor(sensors[0])
+    }
+
     if (mapContainer.current && !mapRef.current) {
       mapRef.current = new maplibregl.Map({
         container: mapContainer.current,
@@ -38,13 +50,8 @@ const DashboardMap: React.FC<DashboardMapProps> = ({ sensors, onHoverSensor }) =
 
     if (!mapRef.current) return
 
-    // clear old markers + popup
     markersRef.current.forEach(marker => marker.remove())
     markersRef.current = []
-    if (hoverPopupRef.current) {
-      hoverPopupRef.current.remove()
-      hoverPopupRef.current = null
-    }
 
     const bounds = new maplibregl.LngLatBounds()
 
@@ -54,7 +61,7 @@ const DashboardMap: React.FC<DashboardMapProps> = ({ sensors, onHoverSensor }) =
       if (lat == null || lng == null) return
 
       const el = document.createElement('div')
-      el.className = 'map-dot'
+      el.className = `map-dot ${activeSensor?.id === sensor.id ? 'active' : ''}`
 
       const label = document.createElement('span')
       label.className = 'map-label'
@@ -65,24 +72,8 @@ const DashboardMap: React.FC<DashboardMapProps> = ({ sensors, onHoverSensor }) =
         .setLngLat([lng, lat])
         .addTo(mapRef.current!)
 
-      el.addEventListener('mouseenter', () => {
-        if (hoverPopupRef.current) hoverPopupRef.current.remove()
-
-        const popup = new maplibregl.Popup({ offset: 25 })
-          .setLngLat([lng, lat])
-          .setHTML(`Lat: ${lat.toFixed(5)}<br/>Lng: ${lng.toFixed(5)}`)
-        popup.addTo(mapRef.current!)
-        hoverPopupRef.current = popup
-
-        onHoverSensor?.(sensor)
-      })
-
-      el.addEventListener('mouseleave', () => {
-        if (hoverPopupRef.current) {
-          hoverPopupRef.current.remove()
-          hoverPopupRef.current = null
-        }
-        onHoverSensor?.(null)
+      el.addEventListener('click', () => {
+        handleSensorClick(sensor)
       })
 
       markersRef.current.push(marker)
@@ -90,18 +81,40 @@ const DashboardMap: React.FC<DashboardMapProps> = ({ sensors, onHoverSensor }) =
     })
 
     if (!bounds.isEmpty()) {
-      const isMobile = window.innerWidth <= 768
+      const isMobile = window.innerWidth <= 750
       mapRef.current.fitBounds(bounds, {
         padding: isMobile
-          ? { top: 40, right: 40, bottom: 110, left: 40 }
-          : { top: 140, right: 140, bottom: 200, left: 140 },
+          ? { top: 40, right: 40, bottom: 200, left: 40 }
+          : { top: 140, right: 140, bottom: 280, left: 140 },
         animate: false,
-        maxZoom: 10,
+        maxZoom: 9,
       })
     }
-  }, [sensors, MAPTILER_KEY, onHoverSensor])
+  }, [sensors, MAPTILER_KEY, activeSensor])
 
-  return <div ref={mapContainer} className="map-container" />
+  return (
+    <div ref={mapContainer} className="map-container">
+      {activeSensor && (
+        <div className="sensor-info">
+          <div className="text">
+            <h3>SENSOR-{activeSensor.id.slice(0, 5).toUpperCase()}</h3>
+            <p>Battery: {activeSensor.battery ? activeSensor.battery + '%' : 'N/A'}</p>
+            <p>Location: {activeSensor.latitude?.toFixed(5)} / {activeSensor.longitude?.toFixed(5)}</p>
+          </div>
+          <button
+            onClick={() => {
+              if (activeSensor.latitude && activeSensor.longitude) {
+                window.open(generateGoogleMapsLink(activeSensor.latitude, activeSensor.longitude), '_blank');
+              }
+            }}
+            className="map-button"
+          >
+            <MapPin />
+          </button>
+        </div>
+      )}
+    </div>
+  )
 }
 
 export default DashboardMap
