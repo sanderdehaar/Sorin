@@ -97,7 +97,6 @@ header .header-right img:hover {
     cursor: pointer;
 }
 
-
 .menu-icon > span {
     width: 52px;
     height: 3px;
@@ -112,15 +111,15 @@ header .header-right img:hover {
     header {
         width: 100%;
         margin-left: 0px;
+        display: none;
+        height: 80px;
+        padding: var(--gap-sm);
     }
     header .menu-icon {
         display: flex;
     }
     header .header-left .dropdown-container,
     header .header-right {
-        display: none;
-    }
-    .header {
         display: none;
     }
     .mobile-header {
@@ -131,8 +130,14 @@ header .header-right img:hover {
     }
     header .header-left .logo-box {
         display: flex;
+        width: 150px;
+        height: 40px;
+        background-color: transparent;
+        background-image: url('../../assets/images/logo_mobile.svg');
+        background-size: contain;
+        background-repeat: no-repeat;
     }
-    header {
-        height: 80px;
+    .header-left .logo-box .logo {
+        display: none;
     }
 }
