@@ -45,7 +45,7 @@
 }
 
 .dashboard__card .dashboard__weekly-stats .dashboard__weekly-stats--value {
-    font-size: var(--font-size-5xl);
+    font-size: var(--font-size-3xl);
     font-family: var(--font-primary);
     color: var(--color-black);
 }
@@ -85,9 +85,6 @@
 @media (max-width: 1400px) {
     .dashboard__card .card__top h3 {
         font-size: var(--font-size-lg);
-    }
-    .dashboard__card .dashboard__weekly-stats .dashboard__weekly-stats--value {
-        font-size: var(--font-size-3xl);
     }
 }
 
