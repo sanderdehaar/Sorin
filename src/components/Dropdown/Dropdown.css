@@ -1,0 +1,268 @@
+/* Filter component */
+
+.filter__button {
+    padding: 8px 20px;
+    color: var(--color-white);
+    cursor: pointer;
+    border: none;
+    border-radius: var(--radius-xs);
+    background-color: var(--color-black);
+    display: flex;
+    gap: var(--space-4);
+    max-width: 127.06px;
+    width: 100%;
+}
+
+.filter__modal {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: var(--color-gray-light2);
+    padding: var(--space-4);
+    border-radius: var(--radius-xs);
+    max-width: 400px;
+    width: 100%;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.filter__modal::-webkit-scrollbar {
+    display: none;
+}
+
+.filter__modal .filter_title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-4);
+    font-size: var(--font-size-1xl);
+    font-family: var(--font-secondary);
+    color: var(--color-black);
+}
+
+.filter__modal .filter_title .icon {
+    cursor: pointer;
+}
+
+.filter__modal .filter__options {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+.filter__modal .filter__options .filter__buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: var(--space-2);
+}
+
+.filter__modal .filter__options .filter__buttons button {
+    padding: 8px 20px;
+    color: var(--color-white);
+    cursor: pointer;
+    border: none;
+    border-radius: var(--radius-xs);
+    background-color: var(--color-black);
+    font-size: var(--font-size-md);
+    display: flex;
+    gap: var(--space-4);
+}
+
+.filter__modal .filter__options .filter__buttons button .icon {
+    display: none;
+    color: var(--color-white);
+}
+
+.filter__modal .filter__options .filter__buttons button:first-child {
+    background-color: var(--color-white);
+    color: var(--color-black);
+}
+
+.filter__modal .filter__options input {
+    width: 100%;
+    background-color: var(--color-white);
+    border: none;
+    border-radius: var(--radius-xs);
+    font-size: var(--font-size-md);
+    font-family: var(--font-secondary);
+    color: var(--color-black);
+    text-align: start;
+    padding: var(--space-3);
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.filter__modal .filter__options input:focus {
+    border: none;
+    outline: none;
+}
+
+.react-datepicker-wrapper {
+    width: 100%;
+}
+
+.react-datepicker-wrapper:hover {
+    cursor: pointer;
+}
+
+
+/* Dropdown component */
+
+.dropdown {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.dropdown .dropdown__toggle {
+    width: 100%;
+    background-color: var(--color-white);
+    border: none;
+    border-radius: var(--radius-xs);
+    font-size: var(--font-size-md);
+    font-family: var(--font-secondary);
+    color: var(--color-black);
+    text-align: start;
+    padding: var(--space-3);
+}
+
+.dropdown .dropdown__toggle:hover {
+    cursor: pointer;
+}
+
+.dropdown .dropdown__menu {
+    display: flex;
+    flex-direction: column;
+}
+
+.dropdown .dropdown__menu .dropdown__item {
+    width: 100%;
+    background-color: var(--color-white);
+    border: none;
+    font-size: var(--font-size-md);
+    font-family: var(--font-secondary);
+    color: var(--color-black);
+    text-align: start;
+    padding: var(--space-3);
+}
+
+.dropdown .dropdown__menu .dropdown__item:hover {
+    cursor: pointer;
+    background-color: var(--color-black);
+    color: var(--color-white);
+}
+
+.dropdown .dropdown__menu .dropdown__item:first-child {
+    border-top-left-radius: var(--radius-xs);
+    border-top-right-radius: var(--radius-xs);
+}
+
+.dropdown .dropdown__menu .dropdown__item:last-child {
+    border-bottom-left-radius: var(--radius-xs);
+    border-bottom-right-radius: var(--radius-xs);
+}
+
+.dropdown label {
+    font-size: var(--font-size-md);
+    font-family: var(--font-secondary);
+    color: var(--color-black);
+}
+
+.filter__modal label {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.filter__modal label span {
+    font-size: var(--font-size-md);
+    font-family: var(--font-secondary);
+    color: var(--color-black);
+}
+
+@media (max-width: 1600px) {
+
+}
+
+@media (max-width: 1400px) {
+
+}
+
+@media (max-width: 1080px) {
+
+}
+
+@media (max-width: 650px) {
+    .analytics .dashboard__card {
+        position: inherit;
+    }
+    .filter__button svg {
+        width: var(--font-size-5xl);
+        height: var(--font-size-5xl);
+    }
+    .filter__button {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        bottom: var(--space-8);
+        background-color: var(--color-black);
+        color: var(--color-white);
+        padding: var(--space-4);
+        border-radius: var(--radius-xs);
+        max-width: 100%;
+        width: calc(100% - 2 * var(--space-8));
+    }
+    .filter__modal {
+        left: var(--space-8);
+        right: inherit;
+        background-color: var(--color-white);
+        padding: 0;
+        border-radius: 0;
+        max-width: 100%;
+        width: calc(100% - 2 * var(--space-8));
+        height: calc(100dvh - 2 * var(--space-8));
+        padding-bottom: calc(var(--space-8) * 3);
+        overflow-y: scroll;
+    }
+    .filter__modal .filter_title {
+        font-size: var(--font-size-1xl);
+    }
+    .filter__modal .filter__options .filter__buttons button:first-child {
+        display: none;
+    }
+    .filter__modal .filter__options .filter__buttons button {
+        position: fixed;
+        display: flex;
+        align-items: center;
+        bottom: var(--space-8);
+        background-color: var(--color-black);
+        color: var(--color-white);
+        padding: var(--space-4);
+        border-radius: var(--radius-xs);
+        max-width: calc(100% - 2 * var(--space-8));
+        width: 100%;
+    }
+    .filter__modal .filter__options .filter__buttons button .icon {
+        display: block;
+    }
+    .analytics .dropdown .dropdown__toggle {
+        background-color: var(--color-gray-light2);
+        font-size: var(--font-size-lg);
+    }
+    .analytics .dropdown .dropdown__menu .dropdown__item {
+        background-color: var(--color-gray-light2);
+        font-size: var(--font-size-lg);
+    }
+    .analytics .filter__modal label span,
+    .analytics .dropdown label {
+        font-size: var(--font-size-lg);
+    }
+    .analytics .filter__modal .filter__options input {
+        background-color: var(--color-gray-light2);
+        font-size: var(--font-size-lg);
+    }
+    .dropdown .dropdown__menu .dropdown__item:hover {
+        background-color: var(--color-gray-light2);
+        color: var(--color-black);
+    }
+}

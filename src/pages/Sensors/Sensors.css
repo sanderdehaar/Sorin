@@ -1,0 +1,18 @@
+.sensors {
+  width: calc(100% - 2 * var(--space-8));
+  height: calc(100vh - 2 * var(--space-8) - 120px);
+  margin: var(--space-8);
+  box-sizing: border-box;
+}
+
+@media (max-width: 1080px) {
+  .sensors {
+      height: max-content;
+  }
+}
+
+@media (max-width: 650px) {
+  .sensors {
+      margin-top: 0;
+  }
+}

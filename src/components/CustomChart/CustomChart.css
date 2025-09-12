@@ -1,0 +1,28 @@
+/* Custom chart component */
+.analytics .dashboard__card canvas {
+    flex-grow: 1;
+    width: 100%;
+    height: max-content;
+    padding: 10px 0px;
+    min-height: 0;
+}
+
+
+@media (max-width: 1600px) {
+
+}
+
+@media (max-width: 1400px) {
+
+}
+
+@media (max-width: 1080px) {
+
+}
+
+@media (max-width: 650px) {
+    .analytics .dashboard__card {
+        height: 310px;
+        max-height: 100%;
+    }
+}

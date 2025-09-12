@@ -1,0 +1,50 @@
+.map-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.maplibregl-ctrl-top-right,
+.maplibregl-ctrl-bottom-right {
+    display: none;
+}
+
+.maplibregl-map {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    border-radius: var(--border-radius);
+}
+
+.map-dot {
+    position: relative;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 3px solid var(--color-green);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.map-dot::after {
+    margin-top: 0.5px;
+    margin-left: 0.5px;
+    content: '';
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: var(--color-green);
+    border: 2px solid var(--color-green);
+}
+
+.map-label {
+    position: absolute;
+    top: 38px;
+    font-family: var(--font-secondary);
+    color: var(--color-black);
+    font-size: var(--font-lg);
+    white-space: nowrap;
+}

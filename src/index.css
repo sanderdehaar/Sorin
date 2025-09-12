@@ -1,0 +1,138 @@
+/* 
+Global Styles
+------------------------------------------------------
+   • Modern Reset
+   • Design Tokens (colors, spacing, typography)
+   • Base styles for html/body/headings
+   • Container helper for layout
+------------------------------------------------------ 
+*/
+
+@font-face {
+  font-family: 'primaryFont';
+  src: url('../src/assets/fonts/Montserrat-Bold.ttf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'secondaryFont';
+  src: url('../src/assets/fonts/Montserrat-Medium.ttf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@layer reset, tokens, base, layout;
+
+/* ---------------- RESET ---------------- */
+@layer reset {
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  img, picture, video, canvas, svg { display: block; max-width: 100%; height: auto; }
+
+  input, textarea, select, button { font: inherit; color: inherit; }
+}
+
+/* -------------- TOKENS ----------------- */
+@layer tokens {
+  :root {
+    /* COLORS */
+    --color-black: black;
+    --color-white: white;
+    --color-gray-dark: #5D5D5D;
+    --color-gray-light: #BCBCBC;
+    --color-gray-light2: #f2f2f2;
+    --color-blue: #66B6F0;
+    --color-green: #6EB276;
+    --color-red: #FF5555;
+    --color-yellow: #FF9800;
+
+    /* TYPOGRAPHY */
+    --font-primary: 'primaryFont', sans-serif;
+    --font-secondary: 'secondaryFont', sans-serif;
+    --font-size-xs: 0.75rem;    /* 12px */
+    --font-size-sm: 0.875rem;   /* 14px */
+    --font-size-md: 1rem;       /* 16px */
+    --font-size-lg: 1.125rem;   /* 18px */
+    --font-size-xl: 1.25rem;    /* 20px */
+    --font-size-1xl: 1.375rem;  /* 22px */
+    --font-size-2xl: 1.5rem;    /* 24px */
+    --font-size-3xl: 1.75rem;   /* 28px */
+    --font-size-4xl: 2rem;      /* 32px */
+    --font-size-5xl: 2.25rem;   /* 36px */
+    --font-size-6xl: 2.375rem;  /* 38px */
+
+
+    /* SPACING */
+    --space-1: 0.25rem; /* 4px */
+    --space-2: 0.5rem; /* 8px */
+    --space-3: 0.75rem; /* 12px */
+    --space-4: 1rem; /* 16px */
+    --space-5: 1.25rem; /* 20px */
+    --space-6: 1.5rem; /* 24px */
+    --space-8: 2rem; /* 32px */
+
+
+    /* RADIUS */
+    --radius-xs: 10px;
+    --radius-full: 9999px;
+
+
+    /* LAYOUT */
+    --max-content: 100rem; /* 1600px */
+  }
+}
+
+/* ---------------- BASE ---------------- */
+@layer base {
+  html, body, #root { height: 100%; }
+
+  body {
+    font-family: var(--font-secondary);
+    font-size: var(--font-size-lg);
+    color: var(--color-black);
+    background: var(--color-white);
+  }
+
+  h1 { font-size: var(--font-size-6xl); font-family: var(--font-primary); }
+  h2 { font-size: var(--font-size-6xl); font-family: var(--font-primary); }
+
+  .icon {
+    width: var(--font-size-5xl);
+    height: var(--font-size-5xl);
+    color: var(--color-gray-dark);
+  }
+
+  .donut-chart__container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+  }
+
+  .donut-chart__container canvas {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      height: auto;
+  }
+}
+
+/* ------------- LAYOUT HELPERS ----------- */
+@layer layout {
+  .container {
+    max-width: var(--max-content);
+    margin-inline: auto;
+    padding-inline: var(--space-6);
+  }
+}

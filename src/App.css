@@ -1,0 +1,30 @@
+.app {
+    display: flex;
+    height: 100dvh;
+    overflow-x: hidden;
+    flex-direction: column;
+}
+
+main {
+    position: relative;
+    top: 120px;
+    margin-left: 300px;
+    height: calc(100dvh - 120px);
+    transition: margin-left 0.3s ease;
+}
+
+.app--collapsed main {
+    margin-left: 105px;
+}
+
+@media (max-width: 1080px) {
+    .app main {
+        margin-left: 105px;
+    }
+}
+
+@media (max-width: 650px) {
+    .app main {
+        margin-left: 0px;
+    }
+}

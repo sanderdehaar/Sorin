@@ -1,0 +1,21 @@
+.map {
+  width: calc(100% - 2 * var(--space-8));
+  height: calc(100dvh - 2 * var(--space-8) - 120px);
+  margin: var(--space-8);
+  box-sizing: border-box;
+}
+
+.map canvas {
+    padding: 0;
+}
+
+.map .dashboard__card {
+    border-radius: 0;
+}
+
+@media (max-width: 650px) {
+    .map {
+        margin-top: 0;
+        height: calc(100dvh - var(--space-8) - 120px);
+    }
+}

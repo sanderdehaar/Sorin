@@ -1,0 +1,12 @@
+.analytics {
+    width: calc(100% - 2 * var(--space-8));
+    height: calc(100vh - 2 * var(--space-8) - 120px); 
+    margin: var(--space-8);
+    box-sizing: border-box;
+}
+
+@media (max-width: 650px) {
+    .analytics {
+        margin-top: 0;
+    }
+}

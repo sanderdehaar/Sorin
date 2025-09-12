@@ -1,0 +1,116 @@
+/* Header component */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 120px;
+    margin-left: 300px;
+    width: calc(100% - 300px);
+    padding: var(--space-8);
+    transition: margin-left 0.3s ease, width 0.3s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 7;
+    background-color: var(--color-white);
+}
+
+.app--collapsed header {
+    margin-left: 105px;
+    width: calc(100% - 105px);
+}
+
+header .header__left .header__search {
+    display: flex;
+}
+
+header .header__left .header__search {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+}
+
+header .header__left .header__search input {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: var(--font-size-lg);
+    font-family: var(--font-secondary);
+    color: var(--color-gray-dark);
+    max-width: 350px;
+}
+
+header .header__left .header__search input::placeholder {
+    color: var(--color-gray-dark);
+}
+
+header .header__right {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+}
+
+header .header__right .header__icon {
+    position: relative;
+    cursor: pointer;
+}
+
+header .header__right .header__icon::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 12px;
+    height: 12px;
+    background-color: var(--color-red);
+    border-radius: 50%;
+}
+
+header .header__right .header__profile {
+    height: 56px;
+    width: 56px;
+    object-fit: cover;
+    border-radius: var(--radius-full);
+}
+
+header .header__mobile {
+    display: none;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header .header__mobile .header__menu {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    cursor: pointer;
+}
+
+header .header__mobile .header__menu span {
+    width: 60px;
+    height: 4px;
+    background-color: var(--color-black);
+}
+
+@media (max-width: 1080px) {
+    header {
+        margin-left: 105px;
+        width: calc(100% - 105px);
+    }
+}
+
+@media (max-width: 650px) {
+    .app--collapsed header,
+    header {
+        margin-left: 0px;
+        width: 100%;
+    }
+    header .header__left,
+    header .header__right {
+        display: none;
+    }
+    header .header__mobile {
+        display: flex;
+    }
+}
